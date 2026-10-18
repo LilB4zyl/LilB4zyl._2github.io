@@ -37,6 +37,9 @@
   --theme-bw: #ffffff;
   --theme-bw-ambient: rgba(255, 255, 255, 0.14);
 
+  --theme-blue: #00b4d8;
+  --theme-blue-ambient: rgba(0, 180, 216, 0.22);
+
   --theme-others: #b388ff;
   --theme-others-ambient: rgba(179, 136, 255, 0.18);
 
@@ -123,9 +126,9 @@ button {
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
-  transition: background var(--transition-slow), transform 1.2s ease-out;
+  transition: background var(--transition-slow);
   opacity: 0.85;
-  will-change: transform, background;
+  will-change: left, top, background;
 }
 
 /* Animated Procedural Film Grain Noise */
@@ -404,6 +407,10 @@ button {
   --item-color: var(--theme-bw);
   --item-ambient: var(--theme-bw-ambient);
 }
+.item-blue {
+  --item-color: var(--theme-blue);
+  --item-ambient: var(--theme-blue-ambient);
+}
 .item-others {
   --item-color: var(--theme-others);
   --item-ambient: var(--theme-others-ambient);
@@ -597,6 +604,26 @@ button {
   position: relative;
 }
 
+.artwork-card.card-16-9,
+.artwork-card:has(.format-16-9) {
+  max-width: 820px;
+}
+
+.artwork-card.card-4-3,
+.artwork-card:has(.format-4-3) {
+  max-width: 740px;
+}
+
+.artwork-card.card-1-1,
+.artwork-card:has(.format-1-1) {
+  max-width: 580px;
+}
+
+.artwork-card.card-3-4,
+.artwork-card:has(.format-3-4) {
+  max-width: 500px;
+}
+
 /* The Avant-Garde Image Frame Placeholder */
 .artwork-frame {
   position: relative;
@@ -613,6 +640,11 @@ button {
   transition: all var(--transition-slow);
   cursor: pointer;
 }
+
+.artwork-frame.format-16-9 { aspect-ratio: 16 / 9; }
+.artwork-frame.format-4-3 { aspect-ratio: 4 / 3; }
+.artwork-frame.format-1-1 { aspect-ratio: 1 / 1; }
+.artwork-frame.format-3-4 { aspect-ratio: 3 / 4; }
 
 .artwork-frame:hover {
   border-color: var(--active-color);
@@ -991,6 +1023,7 @@ button {
 .realm-btn-red { --btn-color: var(--theme-red); --btn-bg: var(--theme-red-ambient); }
 .realm-btn-green { --btn-color: var(--theme-green); --btn-bg: var(--theme-green-ambient); }
 .realm-btn-bw { --btn-color: var(--theme-bw); --btn-bg: var(--theme-bw-ambient); }
+.realm-btn-blue { --btn-color: var(--theme-blue); --btn-bg: var(--theme-blue-ambient); }
 .realm-btn-others { --btn-color: var(--theme-others); --btn-bg: var(--theme-others-ambient); }
 .realm-btn-film { --btn-color: var(--theme-film); --btn-bg: var(--theme-film-ambient); }
 

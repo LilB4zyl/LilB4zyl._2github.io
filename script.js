@@ -30,6 +30,10 @@
       color: '#ffffff',
       ambient: 'rgba(255, 255, 255, 0.16)'
     },
+    blue: {
+      color: '#00b4d8',
+      ambient: 'rgba(0, 180, 216, 0.22)'
+    },
     others: {
       color: '#b388ff',
       ambient: 'rgba(179, 136, 255, 0.22)'
@@ -70,27 +74,12 @@
     });
   });
 
-  // Dynamic Aura subtle follow
+  // Dynamic Aura: Sticks directly to cursor with zero latency
   if (ambientAura) {
-    let targetX = 50;
-    let targetY = 50;
-    let currentX = 50;
-    let currentY = 50;
-
     window.addEventListener('mousemove', (e) => {
-      targetX = (e.clientX / window.innerWidth) * 100;
-      targetY = (e.clientY / window.innerHeight) * 100;
+      ambientAura.style.left = `${e.clientX}px`;
+      ambientAura.style.top = `${e.clientY}px`;
     });
-
-    function renderAura() {
-      // Gentle smoothing interpolation
-      currentX += (targetX - currentX) * 0.04;
-      currentY += (targetY - currentY) * 0.04;
-      ambientAura.style.top = `${currentY}%`;
-      ambientAura.style.left = `${currentX}%`;
-      requestAnimationFrame(renderAura);
-    }
-    renderAura();
   }
 
   // ------------------------------------------------------------------------
