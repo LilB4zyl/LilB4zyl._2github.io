@@ -1,0 +1,1203 @@
+/* ==========================================================================
+   AVANT-GARDE PORTFOLIO DESIGN SYSTEM — 3D ARTIST
+   Aesthetic: Ethereal, Dark, Surrealist, Dreamlike, Film Noise, Centered
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Google Fonts & CSS Custom Properties (Theme Tokens)
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  /* Color Void Tokens */
+  --bg-deep: #070709;
+  --bg-surface: #0e0e12;
+  --bg-surface-elevated: rgba(22, 22, 28, 0.7);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.25);
+
+  /* Typography */
+  --font-display: 'Cinzel', serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Text Colors */
+  --text-primary: #f2f2f4;
+  --text-muted: #8b8b94;
+  --text-dim: #54545d;
+
+  /* Category Color Signatures */
+  --theme-red: #ff334b;
+  --theme-red-ambient: rgba(255, 51, 75, 0.18);
+
+  --theme-green: #00f0a8;
+  --theme-green-ambient: rgba(0, 240, 168, 0.16);
+
+  --theme-bw: #ffffff;
+  --theme-bw-ambient: rgba(255, 255, 255, 0.14);
+
+  --theme-others: #b388ff;
+  --theme-others-ambient: rgba(179, 136, 255, 0.18);
+
+  --theme-film: #e9b35a;
+  --theme-film-ambient: rgba(233, 179, 90, 0.16);
+
+  /* Active Category Context (Overridden per page / state) */
+  --active-color: var(--theme-bw);
+  --active-ambient: var(--theme-bw-ambient);
+
+  /* Dimensions & Spacing */
+  --max-content-width: 1080px;
+  --ease-ethereal: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.6s var(--ease-ethereal);
+  --transition-fast: 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Global Centered Layout
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  text-align: center;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. Atmospheric Surreal Background & Film Grain Noise Overlay
+   -------------------------------------------------------------------------- */
+/* Dynamic Ambient Ethereal Aura */
+.ambient-aura {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 70vw;
+  height: 70vh;
+  max-width: 850px;
+  max-height: 850px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--active-ambient) 0%, rgba(7, 7, 9, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  transition: background var(--transition-slow), transform 1.2s ease-out;
+  opacity: 0.85;
+  will-change: transform, background;
+}
+
+/* Animated Procedural Film Grain Noise */
+.noise-overlay {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  animation: noiseJitter 0.3s steps(3) infinite;
+}
+
+@keyframes noiseJitter {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1%, 1%); }
+  50% { transform: translate(1%, -1%); }
+  75% { transform: translate(-1%, -1%); }
+  100% { transform: translate(1%, 1%); }
+}
+
+/* Subtle Vignette */
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at center, transparent 35%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+/* --------------------------------------------------------------------------
+   4. Centered Container Framework
+   -------------------------------------------------------------------------- */
+.site-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   5. Site Header & Monogram
+   -------------------------------------------------------------------------- */
+.site-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3.5rem;
+  animation: fadeInDown 1.2s var(--ease-ethereal);
+}
+
+.artist-monogram {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+}
+
+.artist-monogram::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.artist-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+}
+
+.nav-breadcrumbs {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.breadcrumb-link {
+  color: var(--text-dim);
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+
+.breadcrumb-link:hover,
+.breadcrumb-link.active {
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.breadcrumb-separator {
+  color: var(--text-dim);
+  opacity: 0.4;
+}
+
+/* --------------------------------------------------------------------------
+   6. Main Portal: Centered Monolithic Menu (index.html)
+   -------------------------------------------------------------------------- */
+.portal-container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1.5s var(--ease-ethereal);
+}
+
+.portal-intro {
+  margin-bottom: 3.5rem;
+  max-width: 580px;
+}
+
+.portal-title {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+}
+
+.portal-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* The Central 4 Category Menu */
+.category-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 4rem;
+}
+
+.category-menu-item {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  padding: 1.6rem 2rem;
+  background: rgba(14, 14, 18, 0.4);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+  overflow: hidden;
+}
+
+.category-menu-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--item-color, rgba(255, 255, 255, 0.15)) 0%, transparent 80%);
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+
+.category-menu-item:hover {
+  transform: translateY(-3px) scale(1.015);
+  border-color: var(--item-color, rgba(255, 255, 255, 0.4));
+  box-shadow: 0 10px 30px -10px var(--item-ambient, rgba(0, 0, 0, 0.5));
+}
+
+.category-menu-item:hover::before {
+  opacity: 0.18;
+}
+
+.menu-item-left {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+}
+
+.menu-item-index {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  transition: color var(--transition-fast);
+}
+
+.menu-item-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: letter-spacing var(--transition-slow), color var(--transition-fast);
+}
+
+.category-menu-item:hover .menu-item-title {
+  letter-spacing: 0.28em;
+  color: #ffffff;
+}
+
+.category-menu-item:hover .menu-item-index {
+  color: var(--item-color, #ffffff);
+}
+
+.menu-item-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.menu-item-arrow {
+  display: inline-block;
+  font-size: 1rem;
+  transition: transform var(--transition-fast);
+}
+
+.category-menu-item:hover .menu-item-arrow {
+  transform: translateX(4px);
+  color: var(--item-color, #ffffff);
+}
+
+/* Category Color Bindings */
+.item-red {
+  --item-color: var(--theme-red);
+  --item-ambient: var(--theme-red-ambient);
+}
+.item-green {
+  --item-color: var(--theme-green);
+  --item-ambient: var(--theme-green-ambient);
+}
+.item-bw {
+  --item-color: var(--theme-bw);
+  --item-ambient: var(--theme-bw-ambient);
+}
+.item-others {
+  --item-color: var(--theme-others);
+  --item-ambient: var(--theme-others-ambient);
+}
+.item-film {
+  --item-color: var(--theme-film);
+  --item-ambient: var(--theme-film-ambient);
+}
+
+/* Section Separator Ethereal Bar */
+.menu-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 540px;
+  margin: 1.5rem 0;
+}
+
+.menu-separator-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+}
+
+.menu-separator-glyph {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+}
+
+/* --------------------------------------------------------------------------
+   7. Sixth Category (Bottom): Short Films Anchored Section
+   -------------------------------------------------------------------------- */
+.bottom-film-section {
+  width: 100%;
+  max-width: 540px;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.film-menu-card {
+  width: 100%;
+  padding: 1.8rem 2.2rem;
+  background: linear-gradient(180deg, rgba(18, 16, 22, 0.6) 0%, rgba(10, 9, 13, 0.8) 100%);
+  border: 1px solid rgba(233, 179, 90, 0.25);
+  box-shadow: 0 0 25px -10px rgba(233, 179, 90, 0.15);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+
+.film-menu-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--theme-film);
+  box-shadow: 0 12px 35px -8px var(--theme-film-ambient);
+}
+
+.film-card-left {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  text-align: left;
+}
+
+.film-badge-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(233, 179, 90, 0.4);
+  background: rgba(233, 179, 90, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--theme-film);
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.film-menu-card:hover .film-badge-icon {
+  background: var(--theme-film);
+  color: #000;
+  transform: scale(1.08);
+}
+
+.film-card-heading {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  display: block;
+}
+
+.film-card-subheading {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--theme-film);
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.film-card-specs {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   8. Subpage Layouts & Artwork Grid (5 Image Placeholders Each)
+   -------------------------------------------------------------------------- */
+.subpage-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s var(--ease-ethereal);
+}
+
+.subpage-header {
+  margin-bottom: 4rem;
+  max-width: 640px;
+}
+
+.category-number-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--active-color);
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.subpage-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.subpage-statement {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0.75rem auto 0;
+  line-height: 1.6;
+}
+
+/* The 5 Artwork Placeholders Stack / Grid */
+.artworks-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5.5rem;
+}
+
+/* Artwork Card */
+.artwork-card {
+  width: 100%;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* The Avant-Garde Image Frame Placeholder */
+.artwork-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(180deg, rgba(14, 14, 18, 0.7) 0%, rgba(8, 8, 11, 0.9) 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 40px -15px rgba(0, 0, 0, 0.8);
+  transition: all var(--transition-slow);
+  cursor: pointer;
+}
+
+.artwork-frame:hover {
+  border-color: var(--active-color);
+  box-shadow: 0 20px 50px -12px var(--active-ambient);
+  transform: translateY(-4px);
+}
+
+/* Corner Crosshair Brackets for 3D Art Studio Feel */
+.corner-bracket {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+  z-index: 3;
+  transition: border-color var(--transition-fast);
+}
+
+.artwork-frame:hover .corner-bracket {
+  border-color: var(--active-color);
+}
+
+.bracket-tl { top: 12px; left: 12px; border-top: 1px solid; border-left: 1px solid; }
+.bracket-tr { top: 12px; right: 12px; border-top: 1px solid; border-right: 1px solid; }
+.bracket-bl { bottom: 12px; left: 12px; border-bottom: 1px solid; border-left: 1px solid; }
+.bracket-br { bottom: 12px; right: 12px; border-bottom: 1px solid; border-right: 1px solid; }
+
+/* Placeholder Inner Architecture (Shown when user has not yet dropped an image) */
+.frame-placeholder-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 2;
+  text-align: center;
+  transition: opacity var(--transition-fast);
+}
+
+.placeholder-glyph {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--active-color);
+  opacity: 0.6;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+  transition: transform var(--transition-slow), opacity var(--transition-fast);
+}
+
+.artwork-frame:hover .placeholder-glyph {
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+.placeholder-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.placeholder-dimensions {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.placeholder-instruction {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* User Image Slot */
+.artwork-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform var(--transition-slow);
+}
+
+.artwork-image.loaded,
+.artwork-image[src]:not([src=""]) {
+  opacity: 1;
+}
+
+.artwork-frame:hover .artwork-image.loaded {
+  transform: scale(1.03);
+}
+
+/* Artwork Metadata Bar Below Each Frame */
+.artwork-meta {
+  width: 100%;
+  margin-top: 1.4rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.2rem;
+  text-align: left;
+}
+
+.meta-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-number {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--active-color);
+  text-transform: uppercase;
+}
+
+.meta-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-top: 0.15rem;
+  text-transform: uppercase;
+}
+
+.meta-desc {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  max-width: 440px;
+}
+
+.meta-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.meta-engine {
+  color: var(--text-muted);
+}
+
+.meta-specs {
+  margin-top: 0.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   9. Short Films Subpage Layout (Cinematic Video Frame Placeholder)
+   -------------------------------------------------------------------------- */
+.cinema-container {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.cinema-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid rgba(233, 179, 90, 0.35);
+  box-shadow: 0 20px 60px -15px rgba(233, 179, 90, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+
+.cinema-frame:hover {
+  border-color: var(--theme-film);
+  box-shadow: 0 25px 70px -10px rgba(233, 179, 90, 0.3);
+}
+
+.cinema-placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  padding: 2rem;
+}
+
+.cinema-play-button {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(233, 179, 90, 0.12);
+  border: 1px solid var(--theme-film);
+  color: var(--theme-film);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all var(--transition-fast);
+  box-shadow: 0 0 25px rgba(233, 179, 90, 0.25);
+}
+
+.cinema-frame:hover .cinema-play-button {
+  transform: scale(1.1);
+  background: var(--theme-film);
+  color: #000;
+  box-shadow: 0 0 35px var(--theme-film);
+}
+
+.cinema-title-tag {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.cinema-timecode {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.25em;
+  color: var(--theme-film);
+  text-transform: uppercase;
+}
+
+.cinema-drop-note {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 1.2rem;
+  padding: 0.4rem 1rem;
+  border: 1px dashed rgba(233, 179, 90, 0.3);
+  border-radius: 2px;
+  background: rgba(233, 179, 90, 0.05);
+}
+
+/* User Video Slot (Uncommented by user when video file/embed is ready) */
+.cinema-video-element {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Cinema Technical & Synopsis Details */
+.cinema-dossier {
+  width: 100%;
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  text-align: left;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2.5rem;
+}
+
+.dossier-heading {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--theme-film);
+  margin-bottom: 1rem;
+}
+
+.dossier-synopsis {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+
+.dossier-specs-list {
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dossier-specs-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding-bottom: 0.4rem;
+}
+
+.spec-key {
+  color: var(--text-dim);
+}
+
+.spec-value {
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   10. Subpage Bottom Switcher: Quick Navigation Between Color Realms
+   -------------------------------------------------------------------------- */
+.realm-switcher {
+  margin-top: 6rem;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 3rem;
+}
+
+.realm-switcher-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.realm-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.realm-btn {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.realm-btn:hover,
+.realm-btn.active {
+  color: #fff;
+  border-color: var(--btn-color, rgba(255, 255, 255, 0.4));
+  background: var(--btn-bg, rgba(255, 255, 255, 0.04));
+}
+
+.realm-btn-red { --btn-color: var(--theme-red); --btn-bg: var(--theme-red-ambient); }
+.realm-btn-green { --btn-color: var(--theme-green); --btn-bg: var(--theme-green-ambient); }
+.realm-btn-bw { --btn-color: var(--theme-bw); --btn-bg: var(--theme-bw-ambient); }
+.realm-btn-others { --btn-color: var(--theme-others); --btn-bg: var(--theme-others-ambient); }
+.realm-btn-film { --btn-color: var(--theme-film); --btn-bg: var(--theme-film-ambient); }
+
+/* --------------------------------------------------------------------------
+   11. Centered Site Footer & Atmospheric Controls
+   -------------------------------------------------------------------------- */
+.site-footer {
+  width: 100%;
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.footer-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.sound-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  transition: all var(--transition-fast);
+}
+
+.sound-toggle-btn:hover,
+.sound-toggle-btn.playing {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sound-wave-icon {
+  display: inline-flex;
+  gap: 2px;
+  align-items: flex-end;
+  height: 12px;
+}
+
+.wave-bar {
+  width: 2px;
+  height: 100%;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.sound-toggle-btn.playing .wave-bar:nth-child(1) { animation: wavePulse 0.8s ease-in-out infinite alternate; }
+.sound-toggle-btn.playing .wave-bar:nth-child(2) { animation: wavePulse 1.2s ease-in-out infinite 0.2s alternate; }
+.sound-toggle-btn.playing .wave-bar:nth-child(3) { animation: wavePulse 0.6s ease-in-out infinite 0.4s alternate; }
+
+@keyframes wavePulse {
+  0% { height: 20%; }
+  100% { height: 100%; }
+}
+
+.footer-credits {
+  color: var(--text-dim);
+}
+
+/* --------------------------------------------------------------------------
+   12. Interactive Lightbox Modal
+   -------------------------------------------------------------------------- */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(4, 4, 6, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+  padding: 2rem;
+}
+
+.lightbox-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+}
+
+.lightbox-close-btn:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.lightbox-content-box {
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-caption {
+  margin-top: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   13. Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .site-wrapper {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .artist-monogram {
+    font-size: 1.35rem;
+    letter-spacing: 0.3em;
+  }
+
+  .portal-title {
+    font-size: 1.75rem;
+  }
+
+  .category-menu-item {
+    padding: 1.3rem 1.4rem;
+  }
+
+  .menu-item-title {
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
+  }
+
+  .subpage-title {
+    font-size: 1.85rem;
+    letter-spacing: 0.2em;
+  }
+
+  .cinema-dossier {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .artwork-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .meta-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .film-card-left {
+    gap: 1rem;
+  }
+
+  .film-card-heading {
+    font-size: 1.1rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}

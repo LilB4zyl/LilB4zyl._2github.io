@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cinematic 3D short films and audiovisual worldbuilding by Lil B4zyl. Octane Render, Unreal Engine, and experimental soundscapes.">
+  <title>SHORT FILMS &mdash; Lil B4zyl</title>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="film">
+
+  <!-- Atmospheric Background & Film Grain Noise Filter -->
+  <div class="ambient-aura" aria-hidden="true"></div>
+  <div class="vignette-overlay" aria-hidden="true"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Centered Site Wrapper -->
+  <div class="site-wrapper">
+
+    <!-- Centered Header with Navigation Breadcrumbs -->
+    <header class="site-header">
+      <a href="index.html" class="artist-monogram">Lil B4zyl</a>
+      <p class="artist-tagline">3D Artist &amp; Digital Sculptor</p>
+      
+      <nav class="nav-breadcrumbs" aria-label="Breadcrumbs">
+        <a href="index.html" class="breadcrumb-link">&larr; Return to Void</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-link active">06 : Short Films</span>
+      </nav>
+    </header>
+
+    <!-- Subpage Main Content -->
+    <main class="subpage-container">
+
+      <!-- Category Heading -->
+      <section class="subpage-header">
+        <span class="category-number-badge">Category 06 // Cinema</span>
+        <h1 class="subpage-title">Short Films</h1>
+        <p class="subpage-statement">
+          Time-based audiovisual narratives, surreal worldbuilding, and cinematic 3D experiments rendered in ultra-widescreen.
+        </p>
+      </section>
+
+      <!-- Centered Cinematic Cinema Section -->
+      <section class="cinema-container" aria-label="Short Film Showcase">
+
+        <!-- ==================================================================
+             CINEMATIC FILM PLAYER PLACEHOLDER
+             To display your short film, choose either:
+             Option A: Self-hosted MP4:
+               <video class="cinema-video-element" controls poster="assets/images/film_poster.jpg">
+                 <source src="assets/films/your_short_film.mp4" type="video/mp4">
+               </video>
+             Option B: Vimeo or YouTube Embed:
+               <iframe class="cinema-video-element" src="https://player.vimeo.com/video/YOUR_ID" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+             ================================================================== -->
+        <div class="cinema-frame" id="short-film-player" tabindex="0" role="region" aria-label="Short Film Video Player">
+          <span class="corner-bracket bracket-tl"></span>
+          <span class="corner-bracket bracket-tr"></span>
+          <span class="corner-bracket bracket-bl"></span>
+          <span class="corner-bracket bracket-br"></span>
+
+          <!-- PLACEHOLDER INNER CARD -->
+          <div class="cinema-placeholder-inner">
+            <div class="cinema-play-button" aria-hidden="true">&#9658;</div>
+            <h2 class="cinema-title-tag">Chronos : The Floating Monolith</h2>
+            <p class="cinema-timecode">4K DCI &bull; 2.39:1 &bull; 00:07:42 &bull; 24 FPS</p>
+            <div class="cinema-drop-note">
+              Drop your .mp4 or Vimeo/YouTube embed into &lt;div class="cinema-frame"&gt;
+            </div>
+          </div>
+        </div>
+
+        <!-- Film Dossier: Synopsis, Credits, and Specifications -->
+        <div class="cinema-dossier">
+
+          <div class="dossier-column">
+            <h3 class="dossier-heading">Synopsis &amp; Vision</h3>
+            <p class="dossier-synopsis">
+              A lone cybernetic traveler navigates an endless crimson fog basin toward a colossal, levitating fractured obsidian monolith. 
+              The film investigates ancient sacred geometries, digital entropy, and the silence of post-organic civilizations.
+            </p>
+          </div>
+
+          <div class="dossier-column">
+            <h3 class="dossier-heading">Technical Specifications</h3>
+            <ul class="dossier-specs-list">
+              <li>
+                <span class="spec-key">Render Engine:</span>
+                <span class="spec-value">Octane Render 3D &bull; Cinema 4D</span>
+              </li>
+              <li>
+                <span class="spec-key">Resolution:</span>
+                <span class="spec-value">4K DCI (4096 &times; 1714)</span>
+              </li>
+              <li>
+                <span class="spec-key">Aspect Ratio:</span>
+                <span class="spec-value">2.39:1 Anamorphic</span>
+              </li>
+              <li>
+                <span class="spec-key">Sound Design:</span>
+                <span class="spec-value">Custom Binaural Soundscape &bull; 48kHz / 24-bit</span>
+              </li>
+              <li>
+                <span class="spec-key">Direction &amp; 3D:</span>
+                <span class="spec-value">Lil B4zyl</span>
+              </li>
+              <li>
+                <span class="spec-key">Year:</span>
+                <span class="spec-value">2026</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Bottom Realm Switcher -->
+      <nav class="realm-switcher" aria-label="Switch Chromatic Realm">
+        <span class="realm-switcher-label">Switch Realm</span>
+        <div class="realm-links-row">
+          <a href="red.html" class="realm-btn realm-btn-red">Red</a>
+          <a href="green.html" class="realm-btn realm-btn-green">Green</a>
+          <a href="black-and-white.html" class="realm-btn realm-btn-bw">Black &amp; White</a>
+          <a href="others.html" class="realm-btn realm-btn-others">Others</a>
+          <a href="short-films.html" class="realm-btn realm-btn-film active">Short Films</a>
+        </div>
+      </nav>
+
+    </main>
+
+    <!-- Centered Footer -->
+    <footer class="site-footer">
+      <div class="footer-controls">
+        <button id="sound-toggle" class="sound-toggle-btn" type="button" aria-pressed="false">
+          <span class="sound-wave-icon" aria-hidden="true">
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+          </span>
+          <span class="sound-btn-text">Atmosphere: Mute</span>
+        </button>
+      </div>
+      <p class="footer-credits">
+        &copy; 2026 Lil B4zyl &mdash; All Rights Reserved &bull; 3D Art &amp; Digital Sculpture
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
